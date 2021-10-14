@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-
+import {View, StyleSheet, SafeAreaView} from 'react-native';
+import Header from './src/components/Header';
+import CountriesList from './src/components/CountriesList';
 class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>App</Text>
+        <Header />
+        <CountriesList />
       </View>
     );
   }
@@ -14,9 +16,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
   },
 });
 

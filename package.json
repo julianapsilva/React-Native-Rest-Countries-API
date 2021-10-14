@@ -10,8 +10,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "axios": "^0.23.0",
     "react": "17.0.2",
-    "react-native": "0.66.0"
+    "react-native": "0.66.0",
+    "react-native-svg": "^12.1.1",
+    "react-native-svg-transformer": "^0.14.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
