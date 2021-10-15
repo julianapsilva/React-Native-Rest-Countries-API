@@ -1,14 +1,20 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {SvgUri} from 'react-native-svg';
 
 // create a component
-class CountryItem extends Component {
+class CountryItemClass extends Component {
   render() {
+    const {navigation} = this.props;
     const {name, population, capital, region, flag} = this.props.data;
+    const knowMore = () => {
+      navigation.navigate('Country', {data: this.props.data});
+    };
+
     return (
-      <View style={styles.CountryItem}>
+      <TouchableOpacity style={styles.CountryItem} onPress={knowMore}>
         <SvgUri width={300} height={250} uri={flag} style={styles.flag} />
         <View style={styles.info}>
           <Text style={styles.name}>{name}</Text>
@@ -25,9 +31,14 @@ class CountryItem extends Component {
             <Text>{capital}</Text>
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
+}
+
+export default function CountryItem() {
+  const navigation = useNavigation();
+  return <CountryItemClass navigation={navigation} />;
 }
 
 // define your styles
@@ -60,6 +71,3 @@ const styles = StyleSheet.create({
     marginTop: -30,
   },
 });
-
-//make this component available to the app
-export default CountryItem;
