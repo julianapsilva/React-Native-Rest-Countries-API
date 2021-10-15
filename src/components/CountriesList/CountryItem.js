@@ -7,8 +7,8 @@ import {SvgUri} from 'react-native-svg';
 // create a component
 class CountryItemClass extends Component {
   render() {
-    const {navigation} = this.props;
     const {name, population, capital, region, flag} = this.props.data;
+    const {navigation} = this.props;
     const knowMore = () => {
       navigation.navigate('Country', {data: this.props.data});
     };
@@ -36,9 +36,9 @@ class CountryItemClass extends Component {
   }
 }
 
-export default function CountryItem() {
+export default function CountryItem({data}) {
   const navigation = useNavigation();
-  return <CountryItemClass navigation={navigation} />;
+  return <CountryItemClass navigation={navigation} data={data} />;
 }
 
 // define your styles
