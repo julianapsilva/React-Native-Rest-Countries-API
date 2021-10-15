@@ -1,23 +1,22 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
-import Header from './src/components/Header';
-import CountriesList from './src/components/CountriesList';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import Home from './src/views/Home';
+import Country from './src/views/Country';
+
+const Stack = createStackNavigator();
+
 class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Header />
-        <CountriesList />
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Country" component={Country} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-});
 
 export default App;
