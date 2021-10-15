@@ -11,7 +11,11 @@ class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{headerShown: false}}
+          />
           <Stack.Screen name="Country" component={Country} />
         </Stack.Navigator>
       </NavigationContainer>
