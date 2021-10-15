@@ -14,7 +14,7 @@ class CountriesList extends Component {
   }
 
   async componentDidMount() {
-    const response = await api.get('all');
+    const response = await api.get('v2/all');
     this.setState({
       countries: response.data,
     });
