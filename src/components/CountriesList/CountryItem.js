@@ -12,6 +12,9 @@ class CountryItemClass extends Component {
     const knowMore = () => {
       navigation.navigate('Country', {data: this.props.data});
     };
+    const format = pop => {
+      return String(pop).replace(/(.)(?=(\d{3})+$)/g, '$1,');
+    };
 
     return (
       <TouchableOpacity style={styles.CountryItem} onPress={knowMore}>
@@ -20,7 +23,7 @@ class CountryItemClass extends Component {
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.countryInfo}>
             <Text style={{fontWeight: 'bold'}}>Population: </Text>
-            <Text>{population}</Text>
+            <Text>{format(population)}</Text>
           </Text>
           <Text style={styles.countryInfo}>
             <Text style={{fontWeight: 'bold'}}>Region: </Text>
