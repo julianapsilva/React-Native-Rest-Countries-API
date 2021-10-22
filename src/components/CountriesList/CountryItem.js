@@ -18,7 +18,7 @@ class CountryItemClass extends Component {
 
     return (
       <TouchableOpacity style={styles.CountryItem} onPress={knowMore}>
-        <SvgUri width={300} height={250} uri={flag} style={styles.flag} />
+        <SvgUri width={298} height={250} uri={flag} style={styles.flag} />
         <View style={styles.info}>
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.countryInfo}>
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     elevation: 1,
     borderColor: '#000',
+    backgroundColor: '#fff',
   },
   name: {
     fontWeight: 'bold',
