@@ -19,8 +19,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'space-between',
-    elevation: 5,
+    elevation: 4,
     padding: 20,
+    backgroundColor: '#fff',
   },
   title: {
     fontWeight: 'bold',
