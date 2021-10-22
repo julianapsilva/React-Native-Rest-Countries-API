@@ -2,29 +2,16 @@
 import React, {Component} from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import CountryItem from './CountryItem';
-import api from '../../services/api';
 
 // create a component
 class CountriesList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      countries: [],
-    };
-  }
-
-  async componentDidMount() {
-    const response = await api.get('v2/all');
-    this.setState({
-      countries: response.data,
-    });
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.state.countries}
+          initialNumToRender={5}
+          data={this.props.countries}
+          keyExtractor={item => item.id}
           renderItem={({item}) => <CountryItem data={item} />}
         />
       </View>
@@ -33,7 +20,11 @@ class CountriesList extends Component {
 }
 
 // define your styles
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 30,
+  },
+});
 
 //make this component available to the app
 export default CountriesList;
