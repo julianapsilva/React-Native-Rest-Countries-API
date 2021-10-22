@@ -2,7 +2,9 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {SvgUri} from 'react-native-svg';
+import Icon from 'react-native-vector-icons/Feather';
 import api from '../../services/api';
+import Header from '../../components/Header';
 
 // create a component
 class Country extends Component {
@@ -18,6 +20,13 @@ class Country extends Component {
 
     return (
       <View style={styles.container}>
+        <Header />
+        <TouchableOpacity
+          style={styles.goBack}
+          onPress={() => this.props.navigation.goBack()}>
+          <Icon name="arrow-left" size={20} style={styles.icon} />
+          <Text>Back</Text>
+        </TouchableOpacity>
         <View style={styles.info}>
           <SvgUri
             width={330}
@@ -102,6 +111,7 @@ class Country extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    overflow: 'scroll',
   },
   info: {
     paddingLeft: 30,
@@ -134,6 +144,16 @@ const styles = StyleSheet.create({
   },
   borderText: {
     textAlign: 'center',
+  },
+  goBack: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    width: 110,
+    height: 40,
+    marginLeft: 40,
+    marginTop: 40,
+    alignItems: 'center',
+    paddingLeft: 25,
   },
 });
 
