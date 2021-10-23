@@ -1,117 +1,75 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+} from 'react-native';
 import {SvgUri} from 'react-native-svg';
-import Icon from 'react-native-vector-icons/Feather';
-import api from '../../services/api';
 import Header from '../../components/Header';
+import CountryDescription from '../../components/CountryDescription';
+import Borders from '../../components/CountryDescription/borders';
+import GoBackButton from '../../components/GoBackButton';
+import {useTheme} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Feather';
 
 // create a component
-class Country extends Component {
+class CountryClass extends Component {
+  componentDidMount() {
+    console.log(this.props);
+  }
   render() {
     const {data} = this.props.route.params;
-    const changeRoute = async code => {
-      const response = await api.get(`v2/alpha/${code}`);
-      this.props.navigation.navigate('Country', {data: response.data});
-    };
-    const format = pop => {
-      return String(pop).replace(/(.)(?=(\d{3})+$)/g, '$1,');
-    };
+    const {text} = this.props.colors;
+    const {navigation} = this.props;
 
     return (
-      <View style={styles.container}>
-        <Header />
-        <TouchableOpacity
-          style={styles.goBack}
-          onPress={() => this.props.navigation.goBack()}>
-          <Icon name="arrow-left" size={20} style={styles.icon} />
-          <Text>Back</Text>
-        </TouchableOpacity>
-        <View style={styles.info}>
-          <SvgUri
-            width={330}
-            height={250}
-            uri={data.flag}
-            style={styles.flag}
-          />
-          <Text style={styles.name}>{data.name}</Text>
-          <Text>
-            <Text style={{fontWeight: 'bold'}}>Native Name: </Text>
-            <Text>{data.nativeName}</Text>
-          </Text>
-          <Text>
-            <Text style={{fontWeight: 'bold'}}>Population: </Text>
-            <Text>{format(data.population)}</Text>
-          </Text>
-          <Text>
-            <Text style={{fontWeight: 'bold'}}>Region: </Text>
-            <Text>{data.region}</Text>
-          </Text>
-          <Text>
-            <Text style={{fontWeight: 'bold'}}>Subregion: </Text>
-            <Text>{data.subregion}</Text>
-          </Text>
-          <Text>
-            <Text style={{fontWeight: 'bold'}}>Capital: </Text>
-            <Text>{data.capital}</Text>
-          </Text>
-          <Text style={{marginTop: 30}}>
-            <Text style={{fontWeight: 'bold'}}>Top Level Domain: </Text>
-            {data.topLevelDomain.map(domain => (
-              <Text>{domain}</Text>
-            ))}
-          </Text>
-          <Text>
-            <Text style={{fontWeight: 'bold'}}>Currencies: </Text>
-            {data.currencies.map((currience, index) => (
-              <Text>
-                {currience.name}
-                {index < data.currencies.length - 1 && <Text>, </Text>}
-              </Text>
-            ))}
-          </Text>
-          <Text>
-            <Text style={{fontWeight: 'bold'}}>Languages: </Text>
-            {data.languages.map((language, index) => (
-              <Text>
-                {language.name}
-                {index < data.languages.length - 1 && <Text>, </Text>}
-              </Text>
-            ))}
-          </Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <Header />
+          {/* <GoBackButton navigation={navigation} /> */}
+          <TouchableOpacity
+            style={styles.goBack}
+            onPress={() => navigation.goBack()}>
+            <Icon name="arrow-left" size={20} style={styles.icon} />
+            <Text>Back</Text>
+          </TouchableOpacity>
 
-          {data.borders && (
-            <View>
-              <Text
-                style={{fontWeight: 'bold', marginBottom: 10, marginTop: 30}}>
-                Border Countries:
-              </Text>
-              <View style={styles.border}>
-                {data.borders.map(border => {
-                  return (
-                    <View>
-                      <TouchableOpacity
-                        onPress={() => changeRoute(border)}
-                        style={styles.borderButton}>
-                        <Text style={styles.borderText}>{border}</Text>
-                      </TouchableOpacity>
-                    </View>
-                  );
-                })}
-              </View>
-            </View>
-          )}
+          <View style={styles.info}>
+            <SvgUri
+              width={330}
+              height={250}
+              uri={data.flag}
+              style={styles.flag}
+            />
+
+            <CountryDescription data={data} text={text} />
+
+            {data.borders && (
+              <Borders
+                navigation={navigation}
+                text={text}
+                borders={data.borders}
+              />
+            )}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
+}
+
+function Country(props) {
+  const {colors} = useTheme();
+  return <CountryClass {...props} colors={colors} />;
 }
 
 // define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: 'scroll',
   },
   info: {
     paddingLeft: 30,
@@ -122,38 +80,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 30,
   },
-  border: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+  bold: {
+    fontWeight: 'bold',
   },
-  borderButton: {
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.9,
-    shadowRadius: 1,
-    elevation: 1,
-    borderColor: '#000',
-    paddingHorizontal: 10,
-    paddingVertical: 2,
-    marginRight: 10,
-    marginBottom: 10,
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  borderText: {
-    textAlign: 'center',
-  },
-  goBack: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    width: 110,
-    height: 40,
-    marginLeft: 40,
-    marginTop: 40,
-    alignItems: 'center',
-    paddingLeft: 25,
+  flag: {
+    marginTop: 30,
   },
 });
 
