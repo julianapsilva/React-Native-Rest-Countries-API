@@ -1,6 +1,6 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
+import {View, FlatList, SafeAreaView, StyleSheet} from 'react-native';
 import CountryItem from './CountryItem';
 
 // create a component
@@ -9,9 +9,9 @@ class CountriesList extends Component {
     return (
       <View style={styles.container}>
         <FlatList
-          initialNumToRender={5}
+          initialNumToRender={3}
           data={this.props.countries}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.name}
           renderItem={({item}) => <CountryItem data={item} />}
         />
       </View>
