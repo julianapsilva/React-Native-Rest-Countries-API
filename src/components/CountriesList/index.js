@@ -1,6 +1,6 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, FlatList, SafeAreaView, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import CountryItem from './CountryItem';
 
 // create a component
