@@ -38,7 +38,7 @@ class FiltersClass extends Component {
             styles.boxShadow,
             {backgroundColor: elements, color: text},
           ]}>
-          <Picker.Item label="Filter by Region" value="Unknown" />
+          <Picker.Item label="Filter by Region" value="undefined" />
           <Picker.Item label="Africa" value="Africa" />
           <Picker.Item label="Americas" value="Americas" />
           <Picker.Item label="Asia" value="Asia" />

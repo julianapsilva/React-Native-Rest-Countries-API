@@ -23,11 +23,14 @@ class Home extends Component {
   };
 
   handleFilterSelect = filterValue => {
-    console.log('fil', filterValue);
-    const filterBy = this.state.allCountries.filter(
-      country => country.region === filterValue,
-    );
-    this.setState({countries: filterBy});
+    if (filterValue === 'undefined') {
+      this.setState({countries: this.state.allCountries});
+    } else {
+      const filterBy = this.state.allCountries.filter(
+        country => country.region === filterValue,
+      );
+      this.setState({countries: filterBy});
+    }
   };
 
   handleFilterSearch = filterValue => {
