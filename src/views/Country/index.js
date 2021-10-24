@@ -1,25 +1,15 @@
 //import liraries
 import React, {Component} from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  ScrollView,
-} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {SvgUri} from 'react-native-svg';
 import Header from '../../components/Header';
 import CountryDescription from '../../components/CountryDescription';
 import Borders from '../../components/CountryDescription/borders';
 import GoBackButton from '../../components/GoBackButton';
 import {useTheme} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Feather';
 
 // create a component
 class CountryClass extends Component {
-  componentDidMount() {
-    console.log(this.props);
-  }
   render() {
     const {data} = this.props.route.params;
     const {text} = this.props.colors;
@@ -29,14 +19,7 @@ class CountryClass extends Component {
       <ScrollView>
         <View style={styles.container}>
           <Header />
-          {/* <GoBackButton navigation={navigation} /> */}
-          <TouchableOpacity
-            style={styles.goBack}
-            onPress={() => navigation.goBack()}>
-            <Icon name="arrow-left" size={20} style={styles.icon} />
-            <Text>Back</Text>
-          </TouchableOpacity>
-
+          <GoBackButton navigation={navigation} colors={this.props.colors} />
           <View style={styles.info}>
             <SvgUri
               width={330}
@@ -44,7 +27,6 @@ class CountryClass extends Component {
               uri={data.flag}
               style={styles.flag}
             />
-
             <CountryDescription data={data} text={text} />
 
             {data.borders && (
