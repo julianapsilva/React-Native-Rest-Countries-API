@@ -4,10 +4,21 @@ import {ThemeContext} from '../../../App';
 import {useTheme} from '@react-navigation/native';
 import {light, dark} from '../../themes';
 import Icon from 'react-native-vector-icons/Feather';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Header() {
   const {setTheme, theme} = React.useContext(ThemeContext);
   const {colors} = useTheme();
+
+  const storeData = async value => {
+    try {
+      let setLocal;
+      theme === light ? (setLocal = 'dark') : (setLocal = 'light');
+      await AsyncStorage.setItem('theme', setLocal);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <View style={[{backgroundColor: colors.elements}, styles.container]}>
@@ -16,7 +27,10 @@ function Header() {
       </Text>
       <TouchableOpacity
         style={styles.toggleTheme}
-        onPress={() => setTheme(theme === light ? dark : light)}>
+        onPress={() => {
+          setTheme(theme === light ? dark : light);
+          storeData();
+        }}>
         <Icon
           name="moon"
           size={20}
