@@ -1,6 +1,6 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, StyleSheet, Keyboard} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Header from '../../components/Header';
 import Filters from '../../components/Filters';
 import CountriesList from '../../components/CountriesList';
@@ -40,7 +40,6 @@ class Home extends Component {
       );
     });
     this.setState({countries: filterBy});
-    setInterval(() => Keyboard.dismiss(), 5000);
   };
 
   render() {
